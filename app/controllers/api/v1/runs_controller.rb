@@ -1,12 +1,14 @@
 class Api::V1::RunsController < ApplicationController
 
+  skip_before_action :authorized
+
   def index
     @runs = Run.all
     render json: @runs, status: 200
   end
 
   def create
-    @run = Run.create(params[:id])
+    @run = Run.create(run_params)
     render json: @run
 
   end
@@ -21,7 +23,7 @@ class Api::V1::RunsController < ApplicationController
   private
 
   def run_params
-    params.permit( :name, :description, :distance, :expected_pace, :start_time, :expected_end_time, :date, :lat, :lng)
+    params.require(:run).permit(:name, :description, :distance, :expected_pace, :start_time, :expected_end_time, :date, :lat, :lng)
   end
 
 end
