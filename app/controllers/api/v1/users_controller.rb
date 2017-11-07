@@ -1,11 +1,12 @@
 class Api::V1::UsersController < ApplicationController
 
-  skip_before_action :authorized, only: [:index]
+  skip_before_action :authorized, only: [:index, :show]
 
     def index
       @users = User.all
       render json: @users, status: 200
     end
+
 
     def profile
       if current_user #current_user comes from application controller; it finds current user by id found in decoded JWT token
@@ -13,6 +14,13 @@ class Api::V1::UsersController < ApplicationController
       else
         render json: { message: "User not found" }, status: 404
       end
+    end
+
+    def show
+      @user = User.find_by(username: params[:id])
+
+      render json: @user, status: 200
+
     end
 
 

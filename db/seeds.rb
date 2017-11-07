@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-100.times do
+10.times do
   User.create({ username: Faker::HeyArnold.character, password: "1" })
 end
 
@@ -47,3 +47,9 @@ lng: "-73.97360429999998"
 }
 
 ])
+
+ Userrun.create([{user: User.first, run: Run.first, leader: true }])
+
+ Userrun.create([{user: User.first, run: Run.second, leader: true }])
+
+ Userrun.create([{user: User.first, run: Run.third, leader: true }])

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103212425) do
+ActiveRecord::Schema.define(version: 20171107183957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 20171103212425) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "userruns", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "run_id"
+    t.boolean "leader"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["run_id"], name: "index_userruns_on_run_id"
+    t.index ["user_id"], name: "index_userruns_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -36,4 +46,6 @@ ActiveRecord::Schema.define(version: 20171103212425) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "userruns", "runs"
+  add_foreign_key "userruns", "users"
 end

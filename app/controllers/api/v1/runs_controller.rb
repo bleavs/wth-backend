@@ -8,13 +8,30 @@ class Api::V1::RunsController < ApplicationController
   end
 
   def create
+
     @run = Run.create(run_params)
+
+    current_user.runs.push(@run)
+
     render json: @run
 
   end
 
   def show
     @run = Run.find(params[:id])
+
+    render json: @run, status: 200
+
+  end
+
+  def update
+    @run = Run.find(params[:id])
+
+    # if @run.users.length > 0
+
+    # current_user.runs.push(@run)
+
+    @run.users.push(current_user)
 
     render json: @run, status: 200
 
