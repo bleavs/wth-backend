@@ -11,6 +11,8 @@ class CreateRuns < ActiveRecord::Migration[5.1]
       t.string :lat
       t.string :lng
 
+      t.string :dist_from_location
+
       t.timestamps
     end
   end

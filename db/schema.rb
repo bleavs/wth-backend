@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20171107183957) do
     t.string "date"
     t.string "lat"
     t.string "lng"
+    t.string "dist_from_location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
