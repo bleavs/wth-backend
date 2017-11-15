@@ -11,6 +11,11 @@ class Api::V1::RunsController < ApplicationController
 
     @run = Run.create(run_params)
 
+     # @run.date = @run.run_day.to_date
+     # @run.time = @run.run_day
+
+
+
     current_user.runs.push(@run)
 
     render json: @run
@@ -19,6 +24,7 @@ class Api::V1::RunsController < ApplicationController
 
   def show
     @run = Run.find(params[:id])
+
 
     render json: @run, status: 200
 
@@ -40,7 +46,7 @@ class Api::V1::RunsController < ApplicationController
   private
 
   def run_params
-    params.require(:run).permit(:name, :description, :distance, :expected_pace, :start_time, :expected_end_time, :date, :lat, :lng)
+    params.require(:run).permit(:name, :description, :distance, :expected_pace, :expected_end_time, :run_day, :lat, :lng)
   end
 
 end
